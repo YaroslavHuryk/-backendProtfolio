@@ -13,18 +13,19 @@ const cors = require("cors");
 const cvController = require("./controllers/announcementController");
 const app = express();
 const allowedOrigins = [
-  'http://localhost:5173',                         // Для розробки
-  process.env.VERCEL_URL    // Для продакшну
+  'http://localhost:5173',
+  'https://portfolio-yaroslav-huryk.vercel.app/' // Вкажіть ваш основний домен прямо
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Дозволяємо запити без origin (наприклад, Postman або мобільні додатки)
+    // Дозволяємо запити без origin (наприклад, серверні запити)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log("Blocked by CORS:", origin); // Додайте лог для відладки
       callback(new Error('Not allowed by CORS'));
     }
   },
