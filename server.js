@@ -14,7 +14,7 @@ const cvController = require("./controllers/announcementController");
 const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://portfolio-yaroslav-huryk.vercel.app/' // Вкажіть ваш основний домен прямо
+  'https://portfolio-yaroslav-huryk.vercel.app' // Вкажіть ваш основний домен прямо
 ];
 
 app.use(cors({
