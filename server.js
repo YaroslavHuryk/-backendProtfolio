@@ -81,7 +81,7 @@ const app = express();
 
 // --- НАЛАШТУВАННЯ CORS (ТІЛЬКИ ОДИН РАЗ) ---
 app.use(cors({
-  origin: 'https://portfolio-yaroslav-huryk.vercel.app',
+  origin: ['https://portfolio-yaroslav-huryk.vercel.app', 'http://localhost:5173'], // Дозволяємо обидва домени
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   credentials: true,
