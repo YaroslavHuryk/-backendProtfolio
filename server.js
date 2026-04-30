@@ -80,8 +80,30 @@ cloudinary.config({
 const app = express();
 
 // --- НАЛАШТУВАННЯ CORS (ТІЛЬКИ ОДИН РАЗ) ---
+// app.use(cors({
+//   origin: ['https://portfolio-yaroslav-huryk.vercel.app', 'http://localhost:5173'], // Дозволяємо обидва домени
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// }));
+
+const allowedOrigins = [
+  'https://portfolio-yaroslav-huryk.vercel.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: ['https://portfolio-yaroslav-huryk.vercel.app', 'http://localhost:5173'], // Дозволяємо обидва домени
+  origin: function (origin, callback) {
+    // дозволяємо запити без origin (наприклад, Postman або мобільні додатки)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   credentials: true,
